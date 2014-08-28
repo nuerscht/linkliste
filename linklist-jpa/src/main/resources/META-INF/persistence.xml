@@ -1,0 +1,25 @@
+<persistence version="1.0" 
+   xmlns="http://java.sun.com/xml/ns/persistence"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+      http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+  <persistence-unit name="ffhs-linklist-pu">
+  	<class>ch.ffhs.jpa.domain.LinkList</class>
+  	<class>ch.ffhs.jpa.domain.Role</class>
+  	<class>ch.ffhs.jpa.domain.User</class>		
+		<properties>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+			<property name="hibernate.connection.url" value="jdbc:mysql://192.168.3.120/ffhs_linklist"/>
+			<property name="hibernate.connection.username" value="ffhs_linklist"/>
+			<property name="hibernate.connection.password" value="%ffhs%"/>
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.show_sql" value="true"/>
+			<property name="hibernate.format_sql" value="true"/>
+			<property name="hibernate.use_sql_comments" value="false"/>
+
+			<property name="hibernate.hbm2ddl.auto" value="update"/>
+		</properties>
+  </persistence-unit>
+</persistence>  
