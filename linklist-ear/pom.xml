@@ -11,15 +11,15 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.32</version>
+		</dependency>
+		<dependency>
 			<groupId>ch.ffhs</groupId>
 			<artifactId>linklist-jsf</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<type>war</type>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.32</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.ffhs</groupId>
@@ -57,9 +57,9 @@
 							<artifactId>linklist-jpa</artifactId>
 						</ejbModule>
 						<jarModule>
-							<groupId>mysql</groupId>
+							<groupId>mysql</groupId>                            
 							<artifactId>mysql-connector-java</artifactId>
-							<includeInApplicationXml>true</includeInApplicationXml >
+							<includeInApplicationXml>true</includeInApplicationXml>
 						</jarModule>
 					</modules>
 				</configuration>
