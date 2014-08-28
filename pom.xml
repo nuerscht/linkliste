@@ -31,6 +31,6 @@
   <modules>
     <module>linklist-jsf</module>
     <module>linklist-ear</module>
-    <module>linklist-core</module>
+    <module>linklist-jpa</module>
   </modules>
 </project>
