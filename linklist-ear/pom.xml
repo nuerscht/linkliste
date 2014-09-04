@@ -11,11 +11,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.32</version>
-		</dependency>
-		<dependency>
 			<groupId>ch.ffhs</groupId>
 			<artifactId>linklist-jsf</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
