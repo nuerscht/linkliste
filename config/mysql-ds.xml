@@ -1,0 +1,13 @@
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema">
+  <datasource jndi-name="java:jboss/datasources/ffhs-linklist-pu" pool-name="MySQLPool">
+      <connection-url>jdbc:mysql://192.168.3.120/ffhs_linklist</connection-url>
+      <driver>mysql-connector-java-5.1.32.jar_com.mysql.jdbc.Driver_5_1</driver>
+      <pool>
+          <max-pool-size>30</max-pool-size>
+      </pool>
+      <security>
+          <user-name>ffhs_linklist</user-name>
+          <password>%ffhs%</password>
+      </security>
+  </datasource>
+</datasources>

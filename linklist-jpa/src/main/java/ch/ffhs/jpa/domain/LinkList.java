@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity(name="linklist")
+@Entity(name = "linklist")
 public class LinkList {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)

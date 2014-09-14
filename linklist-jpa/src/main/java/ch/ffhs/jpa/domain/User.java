@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-@Entity(name="user")
+@Entity(name = "user")
 public class User {
   @Id
   @GeneratedValue(strategy=GenerationType.IDENTITY)
