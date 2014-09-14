@@ -4,6 +4,7 @@
 	<groupId>ch.ffhs</groupId>
 	<artifactId>linklist-jpa</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>ejb</packaging>
 
 	<dependencies>
 		<dependency>
@@ -67,6 +68,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<packaging>ejb</packaging>
 </project>

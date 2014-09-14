@@ -51,11 +51,6 @@
 							<groupId>ch.ffhs</groupId>
 							<artifactId>linklist-jpa</artifactId>
 						</ejbModule>
-						<jarModule>
-							<groupId>mysql</groupId>                            
-							<artifactId>mysql-connector-java</artifactId>
-							<includeInApplicationXml>true</includeInApplicationXml>
-						</jarModule>
 					</modules>
 				</configuration>
 			</plugin>
