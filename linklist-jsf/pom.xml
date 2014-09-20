@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>linklist-jsf</artifactId>
 	<packaging>war</packaging>
-
+	
 	<dependencies>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -39,6 +39,11 @@
 			<type>ejb</type>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>5.0.9</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -61,4 +66,13 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+		<!--other repositories if any -->
+		<repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file:${project.basedir}/lib</url>
+		</repository>
+	</repositories>
 </project>
