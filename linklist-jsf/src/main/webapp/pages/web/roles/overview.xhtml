@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/resources/templates/template.xhtml">
+	<ui:define name="content">
+		<h1>Rollen Übersicht</h1>
+	    <h:form id="overview_form">	    	
+	        <p:outputPanel>
+                <h:outputText value="Suche: " />
+                <p:inputText id="globalFilter" onkeyup="PF('rolesTable').filter()"  style="width:250px" placeholder="Suchbegriff eingeben..."/>
+            </p:outputPanel>
+            <p:separator/>
+		    <p:dataTable var="role" value="#{roleController.getRoles()}" style="margin-bottom:40px"
+		    widgetVar="rolesTable" emptyMessage="Kein Treffer gefunden." filteredValue="#{roleController.filteredRoles}">
+	        
+		        <p:column headerText="Id" sortBy="#{role.id}" >
+		            <h:outputText value="#{role.id}" />
+		        </p:column>
+		 
+		        <p:column  filterBy="#{role.name}" headerText="Name" sortBy="#{role.name}" filterMatchMode="contains">
+		            <h:outputText value="#{role.name}" />
+		        </p:column>
+		 
+		    </p:dataTable>
+    	</h:form>
+	</ui:define>
+</ui:composition>
