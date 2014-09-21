@@ -27,8 +27,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public Role find(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return roleDao.find(id);
 	}
 
 	@Override
@@ -37,15 +36,13 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public Role findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Role findByName(String name) {		
+		return roleDao.findByName(name);		
 	}
 
 	@Override
 	public List<Role> rolesByUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return roleDao.rolesByUser(user);
 	}
 
 }

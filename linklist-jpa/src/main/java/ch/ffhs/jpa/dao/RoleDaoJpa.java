@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -43,8 +44,9 @@ public class RoleDaoJpa implements RoleDao {
 
 	@Override
 	public Role findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Role> q = em.createQuery("SELECT r FROM Role r WHERE r.name LIKE ':name'",Role.class);
+		q.setParameter("name", name);
+		return q.getSingleResult();
 	}
 
 	@Override
