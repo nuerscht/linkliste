@@ -10,21 +10,26 @@
 	    <h:form id="overview_form">	    	
 	        <p:outputPanel>
                 <h:outputText value="Suche: " />
-                <p:inputText id="globalFilter" onkeyup="PF('rolesTable').filter()"  style="width:250px" placeholder="Suchbegriff eingeben..."/>
+                <p:inputText id="globalFilter" onkeyup="PF('rolesTable').filter()"  
+                	style="width:250px" placeholder="Suchbegriff eingeben...">
+                	
+               	</p:inputText>
             </p:outputPanel>
             <p:separator/>
-		    <p:dataTable var="role" value="#{roleController.getRoles()}" style="margin-bottom:40px"
-		    widgetVar="rolesTable" emptyMessage="Kein Treffer gefunden." filteredValue="#{roleController.filteredRoles}">
+            <h:panelGroup id="rTable">
+		    <p:dataTable  var="role" value="#{roleController.roles}" style="margin-bottom:40px"
+		    widgetVar="rolesTable" emptyMessage="Keine Treffer gefunden!" filteredValue="#{roleController.filteredRoles}" >
 	        
-		        <p:column headerText="Id" sortBy="#{role.id}" >
+		        <p:column headerText="Id" sortBy="#{role.id}" style="width: 30%;" >
 		            <h:outputText value="#{role.id}" />
 		        </p:column>
 		 
-		        <p:column  filterBy="#{role.name}" headerText="Name" sortBy="#{role.name}" filterMatchMode="contains">
+		        <p:column headerText="Name" sortBy="#{role.name}" filterMatchMode="contains" filterBy="#{role.name}">
 		            <h:outputText value="#{role.name}" />
 		        </p:column>
 		 
 		    </p:dataTable>
+		    </h:panelGroup>
     	</h:form>
 	</ui:define>
 </ui:composition>
