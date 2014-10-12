@@ -1,5 +1,56 @@
 @CHARSET "UTF-8";
 
+@font-face{
+  font-family:Batch;
+  src:url('#{resource['fonts:batch.eot']}');
+  src:url('#{resource['fonts:batch.eot']}#iefix') format('embedded-opentype'),
+    url('#{resource['fonts:batch.woff']}') format('woff'),
+    url('#{resource['fonts:batch.ttf']}') format('truetype'),
+    url('#{resource['fonts:batch.svg']}#batchregular') format('svg');
+  font-weight:normal;
+  font-style:normal;
+}
+
+ .batch {
+   font-family:"Batch";
+   font-size:16px;
+   line-height:1;
+   display:inline-block;
+ }
+
+.batch:before {
+    content:attr(data-icon);
+}
+
+.batch-large { font-size:32px; }
+.batch-huge { font-size:64px; }
+.batch-natural { font-size:inherit; }
+
+.scale-up {
+	-webkit-transition: 0.5s ease-in-out; 
+	-moz-transition: 0.5s ease-in-out; 
+	-o-transition: 0.5s ease-in-out; 
+	transition: 0.5s ease-in-out;
+}
+
+.scale-up:HOVER {
+	margin: 0px 5px 0px 5px;
+	-webkit-transition: 0.5s ease-in-out; 
+	-moz-transition: 0.5s ease-in-out; 
+	-o-transition: 0.5s ease-in-out; 
+	transition: 0.5s ease-in-out;
+    -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -ms-transform: scale(1.5);
+    transform: scale(1.5);	
+}
+
+.text-right { text-align:  right;}
+.text-center { text-align:  center;}
+.text-left { text-align:  left;}
+
+.pointer { cursor: pointer; }
+
 .rTable .ui-datatable-header {
 	display: none;
 }
