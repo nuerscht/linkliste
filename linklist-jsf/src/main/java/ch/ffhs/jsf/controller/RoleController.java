@@ -15,6 +15,7 @@ import ch.ffhs.jpa.service.intf.RoleService;
 @ManagedBean
 @ViewScoped
 public class RoleController implements Serializable{
+	private static final long serialVersionUID = 7530910279475628466L;
 	private Role role = new Role();
 	private List<Role> roles;
 	private String searchFilter = "";
