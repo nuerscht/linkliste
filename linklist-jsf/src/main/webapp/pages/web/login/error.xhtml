@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<title>Link-Liste - eine FFHS JEE Applikation - Error</title>
+</h:head>
+
+<h:body>
+	<h:form id="error">
+		<p:outputPanel position="center"
+			style="width: 400px; margin: 100px auto;">
+			<p:outputPanel id="idlogo" styleClass="menuBarTop">
+			</p:outputPanel>
+			<p:panel id="pnlError" header="Login"
+				footer="Anmeldung am System nicht erfolgreich"
+				style="margin: 5px auto;">
+				<h:panelGrid columns="1">
+					<h:outputLabel
+						value="Die angegebenen Benutzerdaten sind fehlerhaft." />
+					<p:link outcome="/pages/web/login/login" value="Hier klicken um zur Anmeldung zurückzukehren" />
+				</h:panelGrid>
+			</p:panel>
+		</p:outputPanel>
+	</h:form>
+</h:body>
+</html>
