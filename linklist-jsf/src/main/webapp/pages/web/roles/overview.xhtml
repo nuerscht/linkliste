@@ -71,6 +71,7 @@
 								<p:outputLabel styleClass="control-label" for="roleName" value="Name:" />
 								<p:inputText id="roleName" styleClass="form-control"  value="#{role.name}"> 
 								<!-- http://stackoverflow.com/questions/18626561/jsf-primefaces-ajax-rendered-not-updating -->
+									<f:attribute name="validatorRoleId" value="#{role.id}"/>
 									<f:validator binding="#{uniqueRoleNameValidator}"/>
 									<p:ajax event="keyup"/>
 								</p:inputText>
