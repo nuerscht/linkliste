@@ -55,5 +55,4 @@ public class RoleDaoJpa implements RoleDao {
 		return null;
 	}
 	
-
 }
