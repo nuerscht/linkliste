@@ -1,145 +1,29 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+<HTML xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<ui:fragment rendered="#{empty title}">
-		<title>Link-Liste - eine FFHS JEE Applikation</title>
-	</ui:fragment>
-	<ui:fragment rendered="#{not empty title}">
-		<title>Link-Liste - #{title}</title>
-	</ui:fragment>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>FFHS Linklist - Login</title>
+	<h:outputStylesheet library="css" name="bootstrap.css" />
+	<h:outputStylesheet library="css" name="login.css" />
 
-	<h:outputStylesheet name="css/main.css" />
-	<h:outputStylesheet name="css/bootstrap.css" />
-
-	<script type="text/javascript">
-		PrimeFaces.locales['de'] = {
-		    closeText: 'Schließen',
-		    prevText: 'Zurück',
-		    nextText: 'Weiter',
-		    monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
-		    monthNamesShort: ['Jan', 'Feb', 'Mär', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
-		    dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
-		    dayNamesShort: ['Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'],
-		    dayNamesMin: ['S', 'M', 'D', 'M ', 'D', 'F ', 'S'],
-		    weekHeader: 'Woche',
-		    firstDay: 1,
-		    isRTL: false,
-		    showMonthAfterYear: false,
-		    yearSuffix: '',
-		    timeOnlyTitle: 'Nur Zeit',
-		    timeText: 'Zeit',
-		    hourText: 'Stunde',
-		    minuteText: 'Minute',
-		    secondText: 'Sekunde',
-		    currentText: 'Aktuelles Datum',
-		    ampm: false,
-		    month: 'Monat',
-		    week: 'Woche',
-		    day: 'Tag',
-		    allDayText: 'Ganzer Tag',
-		    messages: {
-		        'javax.faces.component.UIInput.REQUIRED': '{0}: Validierungsfehler: Eingabe erforderlich.',
-		        'javax.faces.converter.IntegerConverter.INTEGER': '{2}: \'{0}\' must be a number consisting of one or more digits.',
-		        'javax.faces.converter.IntegerConverter.INTEGER_detail': '{2}: \'{0}\' must be a number between -2147483648 and 2147483647 Example: {1}',
-		        'javax.faces.converter.DoubleConverter.DOUBLE': '{2}: \'{0}\' must be a number consisting of one or more digits.',
-		        'javax.faces.converter.DoubleConverter.DOUBLE_detail': '{2}: \'{0}\' must be a number between 4.9E-324 and 1.7976931348623157E308  Example: {1}',
-		        'javax.faces.converter.BigDecimalConverter.DECIMAL': '{2}: \'{0}\' must be a signed decimal number.',
-		        'javax.faces.converter.BigDecimalConverter.DECIMAL_detail': '{2}: \'{0}\' must be a signed decimal number consisting of zero or more digits, that may be followed by a decimal point and fraction.  Example: {1}',
-		        'javax.faces.converter.BigIntegerConverter.BIGINTEGER': '{2}: \'{0}\' must be a number consisting of one or more digits.',
-		        'javax.faces.converter.BigIntegerConverter.BIGINTEGER_detail': '{2}: \'{0}\' must be a number consisting of one or more digits. Example: {1}',
-		        'javax.faces.converter.ByteConverter.BYTE': '{2}: \'{0}\' must be a number between 0 and 255.',
-		        'javax.faces.converter.ByteConverter.BYTE_detail': '{2}: \'{0}\' must be a number between 0 and 255.  Example: {1}',
-		        'javax.faces.converter.CharacterConverter.CHARACTER': '{1}: \'{0}\' must be a valid character.',
-		        'javax.faces.converter.CharacterConverter.CHARACTER_detail': '{1}: \'{0}\' must be a valid ASCII character.',
-		        'javax.faces.converter.ShortConverter.SHORT': '{2}: \'{0}\' must be a number consisting of one or more digits.',
-		        'javax.faces.converter.ShortConverter.SHORT_detail': '{2}: \'{0}\' must be a number between -32768 and 32767 Example: {1}',
-		        'javax.faces.converter.BooleanConverter.BOOLEAN': '{1}: \'{0}\' must be \'true\' or \'false\'',
-		        'javax.faces.converter.BooleanConverter.BOOLEAN_detail': '{1}: \'{0}\' must be \'true\' or \'false\'.  Any value other than \'true\' will evaluate to \'false\'.',
-		        'javax.faces.validator.LongRangeValidator.MAXIMUM': '{1}: Validation Error: Value is greater than allowable maximum of \'{0}\'',
-		        'javax.faces.validator.LongRangeValidator.MINIMUM': '{1}: Validation Error: Value is less than allowable minimum of \'{0}\'',
-		        'javax.faces.validator.LongRangeValidator.NOT_IN_RANGE': '{2}: Validation Error: Specified attribute is not between the expected values of {0} and {1}.',
-		        'javax.faces.validator.LongRangeValidator.TYPE={0}': 'Validation Error: Value is not of the correct type.',
-		        'javax.faces.validator.DoubleRangeValidator.MAXIMUM': '{1}: Validation Error: Value is greater than allowable maximum of \'{0}\'',
-		        'javax.faces.validator.DoubleRangeValidator.MINIMUM': '{1}: Validation Error: Value is less than allowable minimum of \'{0}\'',
-		        'javax.faces.validator.DoubleRangeValidator.NOT_IN_RANGE': '{2}: Validation Error: Specified attribute is not between the expected values of {0} and {1}',
-		        'javax.faces.validator.DoubleRangeValidator.TYPE={0}': 'Validation Error: Value is not of the correct type',
-		        'javax.faces.converter.FloatConverter.FLOAT': '{2}: \'{0}\' must be a number consisting of one or more digits.',
-		        'javax.faces.converter.FloatConverter.FLOAT_detail': '{2}: \'{0}\' must be a number between 1.4E-45 and 3.4028235E38  Example: {1}',
-		        'javax.faces.converter.DateTimeConverter.DATE': '{2}: \'{0}\' could not be understood as a date.',
-		        'javax.faces.converter.DateTimeConverter.DATE_detail': '{2}: \'{0}\' could not be understood as a date. Example: {1}',
-		        'javax.faces.converter.DateTimeConverter.TIME': '{2}: \'{0}\' could not be understood as a time.',
-		        'javax.faces.converter.DateTimeConverter.TIME_detail': '{2}: \'{0}\' could not be understood as a time. Example: {1}',
-		        'javax.faces.converter.DateTimeConverter.DATETIME': '{2}: \'{0}\' could not be understood as a date and time.',
-		        'javax.faces.converter.DateTimeConverter.DATETIME_detail': '{2}: \'{0}\' could not be understood as a date and time. Example: {1}',
-		        'javax.faces.converter.DateTimeConverter.PATTERN_TYPE': '{1}: A \'pattern\' or \'type\' attribute must be specified to convert the value \'{0}\'', 
-		        'javax.faces.converter.NumberConverter.CURRENCY': '{2}: \'{0}\' could not be understood as a currency value.',
-		        'javax.faces.converter.NumberConverter.CURRENCY_detail': '{2}: \'{0}\' could not be understood as a currency value. Example: {1}',
-		        'javax.faces.converter.NumberConverter.PERCENT': '{2}: \'{0}\' could not be understood as a percentage.',
-		        'javax.faces.converter.NumberConverter.PERCENT_detail': '{2}: \'{0}\' could not be understood as a percentage. Example: {1}',
-		        'javax.faces.converter.NumberConverter.NUMBER': '{2}: \'{0}\' could not be understood as a date.',
-		        'javax.faces.converter.NumberConverter.NUMBER_detail': '{2}: \'{0}\' is not a number. Example: {1}',
-		        'javax.faces.converter.NumberConverter.PATTERN': '{2}: \'{0}\' is not a number pattern.',
-		        'javax.faces.converter.NumberConverter.PATTERN_detail': '{2}: \'{0}\' is not a number pattern. Example: {1}',
-		        'javax.faces.validator.LengthValidator.MINIMUM': '{1}: Validation Error: Length is less than allowable minimum of \'{0}\'',
-		        'javax.faces.validator.LengthValidator.MAXIMUM': '{1}: Validation Error: Length is greater than allowable maximum of \'{0}\'',
-		        'javax.faces.validator.RegexValidator.PATTERN_NOT_SET': 'Regex pattern must be set.',
-		        'javax.faces.validator.RegexValidator.PATTERN_NOT_SET_detail': 'Regex pattern must be set to non-empty value.',
-		        'javax.faces.validator.RegexValidator.NOT_MATCHED': 'Regex Pattern not matched',
-		        'javax.faces.validator.RegexValidator.NOT_MATCHED_detail': 'Regex pattern of \'{0}\' not matched',
-		        'javax.faces.validator.RegexValidator.MATCH_EXCEPTION': 'Error in regular expression.',
-		        'javax.faces.validator.RegexValidator.MATCH_EXCEPTION_detail': 'Error in regular expression, \'{0}\''
-		    }
-		};
-	</script>
 </h:head>
 <h:body>
 	<div class="container">
-		<div class="ui-grid ui-grid-responsive">
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-12">
-					<h1>FFHS JEE Projekt - Link Liste</h1>
+		<div class="row">
+			<div class="col-sm-6 col-md-4 col-md-offset-4">
+				<h1 class="text-center login-title">Anmeldung</h1>
+				<div class="account-wall">
+					<h:graphicImage library="images" name="photo.png" styleClass="profile-img" />
+					<form class="form-signin" action="j_security_check" method="POST">
+						<input type="text" class="form-control" placeholder="Benutzername"
+							name="j_username" required="required" autofocus="autofocus" /> <input
+							type="password" class="form-control" placeholder="Password"
+							name="j_password" required="required" />
+						<button class="btn btn-lg btn-primary btn-block" type="submit">
+							Anmelden</button>
+					</form>
 				</div>
-			</div>
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-2">
-				</div>
-				<div class="ui-grid-col-8">
-					<f:view>
-						<h:form prependId="false" id="loginForm">
-							<p:panel id="panel">
-								<p:growl id="msg" showDetail="true" life="3000" />
-								<h:panelGrid columns="2" cellpadding="5"
-									styleClass="panelGridCenter" headerClass="list-header">
-									<f:facet name="header">Login</f:facet>
-									<p:outputLabel for="j_username" value="Username:" />
-									<p:inputText value="#{authenticationController.username}"
-										id="j_username" required="true" />
-									<p:outputLabel for="j_password" value="Password:" />
-									<p:password value="#{authenticationController.password}"
-										id="j_password" required="true" />
-									<f:facet name="footer">
-										<center>
-											<p:commandButton id="loginButton" value="Login"
-												action="#{authenticationController.login}" ajax="false" />
-										</center>
-									</f:facet>
-								</h:panelGrid>
-							</p:panel>
-						</h:form>
-					</f:view>
-				</div>
-				<div class="ui-grid-col-2"></div>
-			</div>
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-12"></div>
 			</div>
 		</div>
 	</div>
 </h:body>
-</html>
+</HTML>

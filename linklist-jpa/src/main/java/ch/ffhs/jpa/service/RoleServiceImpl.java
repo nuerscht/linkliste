@@ -2,6 +2,7 @@ package ch.ffhs.jpa.service;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import ch.ffhs.jpa.service.intf.RoleService;
 
 @Stateless
 @Local(RoleService.class)
+@RolesAllowed({"ADMIN","USER"})
 public class RoleServiceImpl implements RoleService {
 	@Inject
 	private RoleDao roleDao;

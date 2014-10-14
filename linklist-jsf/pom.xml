@@ -8,7 +8,7 @@
 	</parent>
 	<artifactId>linklist-jsf</artifactId>
 	<packaging>war</packaging>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>com.sun.faces</groupId>
@@ -42,7 +42,7 @@
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>5.1</version>			
+			<version>5.1</version>
 		</dependency>
 	</dependencies>
 
