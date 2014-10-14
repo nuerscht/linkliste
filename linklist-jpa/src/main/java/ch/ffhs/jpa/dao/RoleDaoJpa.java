@@ -44,9 +44,10 @@ public class RoleDaoJpa implements RoleDao {
 
 	@Override
 	public Role findByName(String name) {
-		TypedQuery<Role> q = em.createQuery("SELECT r FROM Role r WHERE r.name LIKE ':name'",Role.class);
+		TypedQuery<Role> q = em.createQuery("SELECT r FROM role r WHERE r.name LIKE :name",Role.class);
 		q.setParameter("name", name);
-		return q.getSingleResult();
+		List<Role> result = q.getResultList();
+		return result.size() != 0 ? result.get(0) : null;
 	}
 
 	@Override

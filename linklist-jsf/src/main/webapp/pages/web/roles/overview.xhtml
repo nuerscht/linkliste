@@ -73,8 +73,9 @@
 								<!-- http://stackoverflow.com/questions/18626561/jsf-primefaces-ajax-rendered-not-updating -->
 									<f:attribute name="validatorRoleId" value="#{role.id}"/>
 									<f:validator binding="#{uniqueRoleNameValidator}"/>
-									<p:ajax event="keyup"/>
+									<p:ajax event="keyup" update="roleNameMessage"/>
 								</p:inputText>
+								<h:message id="roleNameMessage" for="roleName"/>
 								<h:inputHidden value="#{role.name}" id="original_value_#{role.id}" data-origin="roleName_#{role.id}"/>
 							</div>
 							<p:commandButton value="Speichern"/>
