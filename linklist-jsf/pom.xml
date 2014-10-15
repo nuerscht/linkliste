@@ -57,6 +57,12 @@
 	</dependencies>
 
 	<build>
+		<finalName>jVision</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/webapp/resources/language</directory>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
