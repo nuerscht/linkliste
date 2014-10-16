@@ -113,12 +113,15 @@
 					<h:form>
 						<p:panel id="panel" header="Navigation" styleClass="form-panel">
 							<p:panelMenu>
+								<p:submenu label="Allgemein">
+									<p:menuitem value="Anleitung" outcome="/pages/web/index" icon="ui-icon-document"/>
+								</p:submenu>
 								<p:submenu label="Rollen">
 									<p:menuitem value="Einfügen" outcome="/pages/web/roles/insert"
-										icon="ui-icon-document"></p:menuitem>
+										icon="ui-icon-document"/>
 									<p:menuitem value="Übersicht"
 										outcome="/pages/web/roles/overview"
-										icon="ui-icon ui-icon-triangle-1-e"></p:menuitem>
+										icon="ui-icon ui-icon-triangle-1-e"/>
 								</p:submenu>
 							</p:panelMenu>
 						</p:panel>
