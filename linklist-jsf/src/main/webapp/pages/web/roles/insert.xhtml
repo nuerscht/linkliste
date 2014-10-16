@@ -7,9 +7,8 @@
 	template="/resources/templates/template.xhtml">
 
 	<ui:define name="content">
-		<h2>Rolle einfügen</h2>
-
 		<h:form id="edit_form">
+			<p:panel id="panel" header="Rolle einfügen" styleClass="form-panel">
 			<p:growl id="growl" />
 			<div class="form-group">
 				<p:outputLabel for="name" value="Name:" />
@@ -21,6 +20,7 @@
 			<p:commandButton id="saveButton" value="Speichern"
 				action="#{roleController.save}" validateClient="true" ajax="true"
 				icon="ui-icon-check" update="growl" styleClass="btn btn-default" />
+				</p:panel>
 		</h:form>
 	</ui:define>
 </ui:composition>
