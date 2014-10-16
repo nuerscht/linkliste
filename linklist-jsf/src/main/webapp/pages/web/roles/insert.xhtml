@@ -9,7 +9,7 @@
 	<ui:define name="content">
 		<h:form id="edit_form">
 			<p:panel id="panel" header="Rolle einfügen" styleClass="form-panel">
-			<p:growl id="growl" />
+			<p:growl id="growl" showDetail="true" />
 			<div class="form-group">
 				<p:outputLabel for="name" value="Name:" />
 				<p:inputText id="name" value="#{roleController.role.name}"

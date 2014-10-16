@@ -24,7 +24,7 @@ public class RoleDaoJpa implements RoleDao {
 	}
 
 	@Override
-	public Role save(Role role) {
+	public Role save(Role role) throws Exception {
 		Role existing = em.find(Role.class, role.getId());
 		if(existing != null){
 			role = em.merge(role);

@@ -18,6 +18,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 import ch.ffhs.jpa.domain.Role;
 import ch.ffhs.jpa.service.intf.RoleService;
 import ch.ffhs.jsf.configuration.DefaultResourceManager;
@@ -63,10 +65,26 @@ public class RoleController implements Serializable{
 	}
 	
 	public void save() {
-		roleService.save(this.role);
+		String title   = "";
+		String message = "";
+		Severity severity = FacesMessage.SEVERITY_INFO;
+		try {
+			roleService.save(this.role);
+			
+			title = "Erfolgreich gespeichert";
+		} catch (Exception e) {
+			title = "Ein Fehler ist aufgetreten!";
+			if (e.getCause().getCause().getClass().equals(ConstraintViolationException.class)) {
+				message = "Eine Rolle mit diesem Namen besteht bereits.";
+				severity = FacesMessage.SEVERITY_ERROR;
+			} else {
+				message = e.getMessage();
+				severity = FacesMessage.SEVERITY_FATAL;
+			}
+		}
 		
 		FacesContext context = FacesContext.getCurrentInstance();
-		context.addMessage("growl", new FacesMessage(FacesMessage.SEVERITY_INFO, "Erfolgreich gespeichert", "asd"));
+		context.addMessage("growl", new FacesMessage(severity, title, message));
 	}
 	
 	public void clearRoles() {

@@ -21,7 +21,7 @@ public class RoleServiceImpl implements RoleService {
 		this.roleDao = roleDao;
 	}
 	
-	public Role save(Role role) {
+	public Role save(Role role) throws Exception {
 		return roleDao.save(role);
 	}
 
