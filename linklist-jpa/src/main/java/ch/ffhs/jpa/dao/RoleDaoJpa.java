@@ -25,6 +25,10 @@ public class RoleDaoJpa implements RoleDao {
 
 	@Override
 	public Role save(Role role) {
+		Role existing = em.find(Role.class, role.getId());
+		if(existing != null){
+			role = em.merge(role);
+		}
 		em.persist(role);
 		return role;
 	}
@@ -54,6 +58,17 @@ public class RoleDaoJpa implements RoleDao {
 	public List<Role> rolesByUser(User user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void delete(Role role) {
+		delete(role.getId());
+	}
+
+	@Override
+	public void delete(int id) {
+		Role r = em.find(Role.class, id);		
+		em.remove(r);		
 	}
 	
 }
