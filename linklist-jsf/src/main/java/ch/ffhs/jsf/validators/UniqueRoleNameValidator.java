@@ -3,16 +3,12 @@ package ch.ffhs.jsf.validators;
 import java.text.MessageFormat;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import ch.ffhs.jpa.domain.Role;
 import ch.ffhs.jpa.service.intf.RoleService;
@@ -23,8 +19,7 @@ import ch.ffhs.jsf.configuration.ResourceManager;
  * @author Sandro Dallo
  *
  */
-@ManagedBean
-@RequestScoped
+@FacesValidator(value="uniqueRoleNameValidator")
 public class UniqueRoleNameValidator implements Validator {
 
 	@Inject

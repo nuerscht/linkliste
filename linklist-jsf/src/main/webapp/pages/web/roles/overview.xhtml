@@ -21,7 +21,7 @@
 				<p:separator />
 				<h:panelGroup>
 					<p:dataTable id="rTable" var="role" value="#{roleController.roles}"
-						style="margin-bottom:40px" styleClass="rTable"
+						style="margin-bottom:40px" styleClass="rTable" 
 						widgetVar="rolesTable" emptyMessage="Keine Treffer gefunden!"
 						filteredValue="#{roleController.filteredRoles}" paginator="true"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -73,8 +73,7 @@
 										<!-- http://stackoverflow.com/questions/18626561/jsf-primefaces-ajax-rendered-not-updating -->
 										<f:attribute name="validatorRoleId" value="#{role.id}" />
 										<f:validateRequired />
-										<f:validator binding="#{uniqueRoleNameValidator}"
-											for="roleName" />
+										<f:validator validatorId="uniqueRoleNameValidator" />
 										<p:ajax event="keyup" update="roleNameMessage"
 											oncomplete="toggleErrorClass(args,'#{roleName.clientId}')" />
 									</p:inputText>
