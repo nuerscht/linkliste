@@ -6,7 +6,9 @@ import ch.ffhs.jpa.domain.Role;
 import ch.ffhs.jpa.domain.User;
 
 public interface RoleService {
-	public Role save(Role role);
+	public Role save(Role role) throws Exception;
+	public void delete(Role role);
+	public void delete(int id);
 	  public Role find(int id);
 	  public List<Role> getAll();
 	  public Role findByName(String name);

@@ -23,7 +23,7 @@ public class RoleServiceImpl implements RoleService {
 		this.roleDao = roleDao;
 	}
 	
-	public Role save(Role role) {
+	public Role save(Role role) throws Exception {
 		return roleDao.save(role);
 	}
 
@@ -45,6 +45,16 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public List<Role> rolesByUser(User user) {
 		return roleDao.rolesByUser(user);
+	}
+
+	@Override
+	public void delete(Role role) {
+		roleDao.delete(role);		
+	}
+
+	@Override
+	public void delete(int id) {
+		roleDao.delete(id);		
 	}
 
 }

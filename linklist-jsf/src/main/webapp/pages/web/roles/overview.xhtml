@@ -6,84 +6,149 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	template="/resources/templates/template.xhtml">
 	<ui:param name="title" value="Rollen Übersicht" />
-	<script type="text/javascript">
-		function resetOriginalvalues(){
-			alert(this);
-		}
-
-	</script> 
 	<ui:define name="content">
-		<h2>Rollen Übersicht</h2>
 		<h:form id="overview_form">
-			<p:outputPanel>
-				<h:outputText value="Suche: " />
-				<p:inputText id="searchFilter"
-					onkeyup="$('#overview_form\\:rTable\\:globalFilter').val(this.value);$('#overview_form\\:rTable\\:globalFilter').trigger('keyup')"
-					style="width:250px" placeholder="Suchbegriff eingeben...">
+			<p:panel id="panel" header="Rollen Übersicht" styleClass="form-panel">
+				<p:growl id="growl" />
+				<p:outputPanel>
+					<h:outputText value="Suche: " />
+					<p:inputText id="searchFilter"
+						onkeyup="$('##{globalFilter.clientId}').val(this.value);$('##{globalFilter.clientId}').trigger('keyup')"
+						style="width:250px" placeholder="Suchbegriff eingeben...">
 
-				</p:inputText>
-			</p:outputPanel>
-			<p:separator />
-			<h:panelGroup>
-				<p:dataTable id="rTable" var="role" value="#{roleController.roles}"
-					style="margin-bottom:40px" styleClass="rTable"
-					widgetVar="rolesTable" emptyMessage="Keine Treffer gefunden!"
-					filteredValue="#{roleController.filteredRoles}" paginator="true"
-					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					paginatorAlwaysVisible="false" rowsPerPageTemplate="5,10,15"
-					rows="10"
-					currentPageReportTemplate="{currentPage} von {totalPages}">
+					</p:inputText>
+				</p:outputPanel>
+				<p:separator />
+				<h:panelGroup>
+					<p:dataTable id="rTable" var="role" value="#{roleController.roles}"
+						style="margin-bottom:40px" styleClass="rTable" 
+						widgetVar="rolesTable" emptyMessage="Keine Treffer gefunden!"
+						filteredValue="#{roleController.filteredRoles}" paginator="true"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						paginatorAlwaysVisible="false" rowsPerPageTemplate="5,10,15"
+						rows="10"
+						currentPageReportTemplate="{currentPage} von {totalPages}">
 
-					<f:facet name="header">
-						<p:outputPanel>
-							<h:outputText value="Search all fields:" />
-							<p:inputText id="globalFilter"
-								onkeyup="PF('rolesTable').filter()" style="width:150px"
-								placeholder="Enter keyword"
-								value="#{roleController.searchFilter}" />
-						</p:outputPanel>
-					</f:facet>
+						<f:facet name="header">
+							<p:outputPanel>
+								<h:outputText value="Search all fields:" />
+								<p:inputText id="globalFilter" binding="#{globalFilter}"
+									onkeyup="PF('rolesTable').filter()" style="width:150px"
+									placeholder="Enter keyword"
+									value="#{roleController.searchFilter}" />
+							</p:outputPanel>
+						</f:facet>
 
-					<p:column headerText="Id" sortBy="#{role.id}" style="width: 30%;">
-						<h:outputText value="#{role.id}" />
-					</p:column>
+						<p:column headerText="Id" sortBy="#{role.id}" style="width: 30%;">
+							<h:outputText value="#{role.id}" />
+						</p:column>
 
-					<p:column headerText="Name" sortBy="#{role.name}"
-						filterMatchMode="contains" filterStyle="display: none;"
-						filterBy="#{role.name}">
-						<h:outputText value="#{role.name}" />
-					</p:column>
+						<p:column headerText="Name" sortBy="#{role.name}"
+							filterMatchMode="contains" filterStyle="display: none;"
+							filterBy="#{role.name}">
+							<h:outputText value="#{role.name}" />
+						</p:column>
 
-					<p:column headerText="Aktion" width="120" styleClass="text-right">
-						<span class="batch pointer scale-up" data-icon="&#xF13D;"
-							onclick="PF('#{role.id}_edit').show();" role="button"></span>
-						<span class="batch pointer scale-up" data-icon="&#xF165;"
-							role="button"></span>
+						<p:column headerText="Aktion" width="120" styleClass="text-right">
+							<span class="batch pointer scale-up" data-icon="&#xF13D;"
+								onclick="PF('#{role.id}_edit').show();" role="button"></span>
+							<span class="batch pointer scale-up" data-icon="&#xF165;"
+								onclick="PF('#{role.id}_delete').show();" role="button"></span>
 
-						<p:dialog header="Rolle '#{role.name}' bearbeiten" minHeight="200"
-							widgetVar="#{role.id}_edit" modal="true" >
-							<p:ajax event="close" update="rTable" />
-							<div class="form-group text-left">
-								<p:outputLabel styleClass="control-label" for="roleId" value="ID:" />
-								<h:outputText id="roleId" styleClass="form-control" value="#{role.id}" />
-							</div>
-							<div class="form-group text-left">
-								<p:outputLabel styleClass="control-label" for="roleName" value="Name:" />
-								<p:inputText id="roleName" styleClass="form-control"  value="#{role.name}"> 
-								<!-- http://stackoverflow.com/questions/18626561/jsf-primefaces-ajax-rendered-not-updating -->
-									<f:validator binding="#{uniqueRoleNameValidator}"/>
-									<p:ajax event="keyup"/>
-								</p:inputText>
-								<h:inputHidden value="#{role.name}" id="original_value_#{role.id}" data-origin="roleName_#{role.id}"/>
-							</div>
-							<p:commandButton value="Speichern"/>
-							<p:commandButton value="Abbrechen" onclick=""/>						
-						</p:dialog>
-					</p:column>
+							<p:dialog header="Rolle '#{role.name}' bearbeiten"
+								minHeight="200" widgetVar="#{role.id}_edit" modal="true"
+								closable="false" id="edit_dialog">
+								<p:ajax event="close" update="rTable" />
+								<div class="form-group text-left">
+									<p:outputLabel styleClass="control-label" for="roleId"
+										value="ID:" />
+									<h:outputText id="roleId" styleClass="form-control"
+										value="#{role.id}" />
+								</div>
+								<div class="form-group text-left">
+									<p:outputLabel styleClass="control-label" for="roleName"
+										value="Name:" />
+									<p:inputText id="roleName" binding="#{roleName}"
+										styleClass="form-control" required="true" value="#{role.name}">
+										<!-- http://stackoverflow.com/questions/18626561/jsf-primefaces-ajax-rendered-not-updating -->
+										<f:attribute name="validatorRoleId" value="#{role.id}" />
+										<f:validateRequired />
+										<f:validator validatorId="uniqueRoleNameValidator" />
+										<p:ajax event="keyup" update="roleNameMessage"
+											oncomplete="toggleErrorClass(args,'#{roleName.clientId}')" />
+									</p:inputText>
+									<h:message id="roleNameMessage" styleClass="validator-message"
+										for="roleName" />
+								</div>
+								<p:commandButton value="Speichern"
+									actionListener="#{roleController.updateRole}"
+									update="rTable, -overview_form-growl" ajax="true">
+									<f:attribute name="roleId" value="#{role.id}" />
+									<f:attribute name="componentId" value="#{roleName.clientId}" />
+								</p:commandButton>
+								<p:commandButton value="Abbrechen" update="rTable " ajax="true"
+									actionListener="#{roleController.clearRoles}">
+									<p:resetInput target="roleName" />
+								</p:commandButton>
+							</p:dialog>
 
-				</p:dataTable>
-			</h:panelGroup>
+							<p:dialog header="Rolle '#{role.name}' löschen" minHeight="200"
+								widgetVar="#{role.id}_delete" modal="true" closable="false"
+								id="delete_dialog">
+								<p:ajax event="close" update="rTable" />
+								<h:outputText
+									value="Willst Du die Rolle '#{role.name}' wirklich löschen?" />
+								<div class="form-group text-left">
+									<p:outputLabel styleClass="control-label" for="deleteId"
+										value="ID:" />
+									<h:outputText id="deleteId" styleClass="form-control"
+										value="#{role.id}" />
+								</div>
+								<div class="form-group text-left">
+									<p:outputLabel styleClass="control-label" for="deleteName"
+										value="Name:" />
+									<h:outputText id="deleteName" binding="#{deleteName}"
+										styleClass="form-control" value="#{role.name}" />
+								</div>
+								<p:commandButton value="Löschen"
+									actionListener="#{roleController.deleteRole}"
+									update="rTable, -overview_form-growl" ajax="true">
+									<f:attribute name="roleId" value="#{role.id}" />
+									<f:attribute name="roleName" value="#{role.name}" />
+								</p:commandButton>
+								<p:commandButton value="Abbrechen" update="rTable " ajax="true"
+									actionListener="#{roleController.clearRoles}">
+								</p:commandButton>
+							</p:dialog>
 
+						</p:column>
+
+					</p:dataTable>
+				</h:panelGroup>
+			</p:panel>
 		</h:form>
+		<f:verbatim>
+			<script type="text/javascript">
+			//<![CDATA[
+			function resetOriginalValues(id){
+				var el = $('#' + id);
+				if(el[0]){
+					var componentId = el.data('origin');
+					$('#' + componentId).val(el.val());
+				}
+			}
+	
+			function toggleErrorClass(params,id){
+				if(params && params.validationFailed){
+					$('#' + id).addClass('ui-state-error');
+				} else {
+					$('#' + id).removeClass('ui-state-error');
+				}
+			}
+			
+	
+			//]]>	
+		</script>
+		</f:verbatim>
 	</ui:define>
 </ui:composition>

@@ -24,7 +24,11 @@ public class RoleDaoJpa implements RoleDao {
 	}
 
 	@Override
-	public Role save(Role role) {
+	public Role save(Role role) throws Exception {
+		Role existing = em.find(Role.class, role.getId());
+		if(existing != null){
+			role = em.merge(role);
+		}
 		em.persist(role);
 		return role;
 	}
@@ -44,15 +48,27 @@ public class RoleDaoJpa implements RoleDao {
 
 	@Override
 	public Role findByName(String name) {
-		TypedQuery<Role> q = em.createQuery("SELECT r FROM Role r WHERE r.name LIKE ':name'",Role.class);
+		TypedQuery<Role> q = em.createQuery("SELECT r FROM role r WHERE r.name LIKE :name",Role.class);
 		q.setParameter("name", name);
-		return q.getSingleResult();
+		List<Role> result = q.getResultList();
+		return result.size() != 0 ? result.get(0) : null;
 	}
 
 	@Override
 	public List<Role> rolesByUser(User user) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void delete(Role role) {
+		delete(role.getId());
+	}
+
+	@Override
+	public void delete(int id) {
+		Role r = em.find(Role.class, id);		
+		em.remove(r);		
 	}
 	
 }

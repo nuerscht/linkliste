@@ -1,5 +1,12 @@
 @CHARSET "UTF-8";
 
+body, html {
+	margin: 0;
+	padding: 10px;
+	height: 100%;
+	background-image: url(/linklist-jsf/resources/images/background.png);
+}
+
 @font-face{
   font-family:Batch;
   src:url('#{resource['fonts:batch.eot']}');
@@ -53,6 +60,45 @@
 
 .rTable .ui-datatable-header {
 	display: none;
+}
+
+.form-group label.ui-state-error,
+.form-group input.ui-state-error{
+	color: inherit !important;
+	background-color: inherit !important;	
+}
+
+.form-group input.ui-state-error{
+	border-color: red;	
+}
+
+.form-group .validator-message{
+	color: red;
+}
+
+.container {
+	background-color: #fff;
+	margin: auto;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	overflow: hidden !important;
+	position: relative;
+}
+
+.form-panel {
+	border-color: #fff;
+	margin-bottom: 10px;
+}
+
+.footer {
+	position: absolute;
+	background-color: #efefef;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	height: 20px;
+	margin-left: -15px;
 }
 
 .ui-grid-col-1, .ui-grid-col-2, .ui-grid-col-3, .ui-grid-col-4, .ui-grid-col-5, .ui-grid-col-6, .ui-grid-col-7, .ui-grid-col-8, .ui-grid-col-9, .ui-grid-col-10, .ui-grid-col-11, .ui-grid-col-12 {

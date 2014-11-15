@@ -7,6 +7,41 @@
 	template="/resources/templates/template.xhtml">
 
 	<ui:define name="content">
-		
+
+		<p:panel id="head" header="Anleitung" styleClass="form-panel">
+			<p:panel id="insert" header="Rolle einfügen" styleClass="form-panel">
+				<ol>
+					<li>In der Navigation auf den Eintrag „Einfügen“ im Untermenü „Rollen“ klicken (Hinweis: Sollte „Einfügen nicht sichtbar sein, so klicken Sie auf den Menüpunkt „Rollen“).</li>
+					<li>Im Eingabe-Feld „Name“ den gewünschten Rollen-Name eingeben.</li>
+					<li>Auf Speichern klicken. Die Status-Meldung des Speichervorgangs wird als System-Meldung in einem Fenster in der oberen rechten Ecke angezeigt.</li>
+				</ol>
+			</p:panel>
+			<p:panel id="show" header="Rolle anzeigen" styleClass="form-panel">
+				<ol>
+					<li>In der Navigation auf den Eintrag „Übersicht“ im Untermenü „Rollen“ klicken (Hinweis: Sollte „Einfügen nicht sichtbar sein, so klicken Sie auf den Menüpunkt „Rollen“).</li>
+				</ol>
+			</p:panel>
+			<p:panel id="edit" header="Rolle bearbeiten" styleClass="form-panel">
+				<ol>
+					<li>Den Dialog „Rolle anzeigen“ (siehe Punkt "Rolle anzeigen" oberhalb) aufrufen.</li>
+					<li>In der Spalte „Aktion“ auf das Icon <span class="batch pointer scale-up" data-icon="" role="button"></span> klicken.</li>
+					<li>Im Eingabe-Feld „Name“ den neuen Namen eintippen.</li>
+					<li>Auf den Knopf „Speichern“ klicken, um die Änderung zu persistieren oder auf den Knopf „Abbrechen“, um den Änderungsvorgang abzubrechen.</li>
+				</ol>
+			</p:panel>
+			<p:panel id="delete" header="Rolle löschen" styleClass="form-panel">
+				<ol>
+					<li>Den Dialog „Rolle anzeigen“ (siehe Punkt "Rolle anzeigen" oberhalb) aufrufen.</li>
+					<li>In der Spalte „Aktion“ auf das Icon <span class="batch pointer scale-up" data-icon="" role="button"></span> klicken.</li>
+					<li>Auf den Knopf „Löschen“ klicken, um den Löschvorgang zu bestätigen oder auf den Knopf „Abbrechen“ klicken, um den Löschvorgang abzubrechen</li>
+				</ol>
+			</p:panel>
+			<p:panel id="search" header="Rolle suchen" styleClass="form-panel">
+				<ol>
+					<li>Den Dialog „Rolle anzeigen“ (siehe Punkt "Rolle anzeigen" oberhalb) aufrufen.</li>
+					<li>2.	Im Eingabe-Feld „Suche:“ den gewünschten Suchbegriff eingeben. Die Tabelle wird automatisch auf den Suchparameter eingeschränkt</li>
+				</ol>
+			</p:panel>
+		</p:panel>
 	</ui:define>
 </ui:composition>
