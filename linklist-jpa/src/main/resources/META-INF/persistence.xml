@@ -8,7 +8,6 @@
 	<persistence-unit name="ffhs-linklist-pu">
 		<jta-data-source>java:jboss/datasources/ffhs-linklist-pu</jta-data-source> 
 		<class>ch.ffhs.jpa.domain.LinkList</class>
-		<class>ch.ffhs.jpa.domain.Role</class>
 		<class>ch.ffhs.jpa.domain.User</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

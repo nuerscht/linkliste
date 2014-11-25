@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity(name = "user")
 public class User {
@@ -20,12 +19,6 @@ public class User {
 	private String lastname;
 	@Column(length = 255, nullable = false)
 	private String email;
-	@Column(length = 128, nullable = false)
-	private String password;
-	@OneToOne
-	private Role role;
-	@Column(length = 36, nullable = false)
-	private String salt;
 
 	public int getId() {
 		return id;
@@ -65,29 +58,5 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
 	}
 }
