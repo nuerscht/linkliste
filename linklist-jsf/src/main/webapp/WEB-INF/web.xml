@@ -24,10 +24,10 @@
 		<param-name>primefaces.CLIENT_SIDE_VALIDATION</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	
+
 	<context-param>
-	    <param-name>javax.faces.SEPARATOR_CHAR</param-name>
-	    <param-value>-</param-value>
+		<param-name>javax.faces.SEPARATOR_CHAR</param-name>
+		<param-value>-</param-value>
 	</context-param>
 
 	<servlet>
@@ -35,6 +35,16 @@
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+
+	<servlet>
+		<servlet-name>Push Servlet</servlet-name>
+		<servlet-class>org.primefaces.push.PushServlet</servlet-class>
+		<async-supported>true</async-supported>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Push Servlet</servlet-name>
+		<url-pattern>/primepush/*</url-pattern>
+	</servlet-mapping>
 
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
@@ -58,11 +68,11 @@
 			<form-error-page>/pages/web/login/error.faces</form-error-page>
 		</form-login-config>
 	</login-config>
-	
+
 	<security-role>
 		<role-name>ADMIN</role-name>
 	</security-role>
-	
+
 	<security-role>
 		<role-name>USER</role-name>
 	</security-role>
@@ -77,24 +87,24 @@
 			<role-name>USER</role-name>
 		</auth-constraint>
 	</security-constraint>
-	
+
 	<security-constraint>
 		<web-resource-collection>
 			<web-resource-name>unsecured resources</web-resource-name>
 			<url-pattern>/javax.faces.resource/*</url-pattern>
 		</web-resource-collection>
 	</security-constraint>
-	
+
 	<mime-mapping>
 		<extension>eot</extension>
 		<mime-type>application/vnd.ms-fontobject</mime-type>
 	</mime-mapping>
-	
+
 	<mime-mapping>
 		<extension>woff</extension>
 		<mime-type>application/x-woff</mime-type>
 	</mime-mapping>
-	
+
 	<mime-mapping>
 		<extension>ttf</extension>
 		<mime-type>application/octet-stream</mime-type>

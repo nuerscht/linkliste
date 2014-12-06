@@ -1,7 +1,11 @@
 package ch.ffhs.jpa.service.intf;
 
-import ch.ffhs.jpa.domain.LinkList;
+import java.util.List;
+
+import ch.ffhs.jpa.domain.Link;
 
 public interface LinkListService {
-	public LinkList save(LinkList linkList);
+	public Link save(Link linkList);
+	public List<Link> getLinks();
+	public Link getById(int id);
 }

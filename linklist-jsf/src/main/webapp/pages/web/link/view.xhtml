@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/resources/templates/template.xhtml">
+
+	<ui:define name="content">
+		<p:panel id="head" header="Links" styleClass="form-panel">
+			<h:form id="form">
+				<p:growl widgetVar="messages" id="messages" showDetail="true" />
+
+				<p:commandButton value="Neuen Link einfügen" type="button"
+					onclick="PF('new-link').show();" />
+				<p:dataTable id="links" var="link"
+					value="#{linkController.getLinks()}" rowKey="#{car.id}"
+					paginator="true" rows="10" tableStyleClass="ui-table-columntoggle"
+					editable="true">
+					<p:ajax event="rowEdit" listener="#{linkController.onRowEdit}" oncomplete="window.location.reload();" />
+					<p:ajax event="rowEditCancel" listener="#{linkController.onRowCancel}" />
+					<p:column headerText="Beschreibung" sortBy="#{link.name}"
+						priority="1">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{link.name}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText id="form-link-name" value="#{link.name}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="URL" priority="2">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{link.url}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{link.url}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Delete?" priority="2" width="100"
+						rendered="#{request.isUserInRole('ADMIN')}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{link.deleted}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:selectBooleanButton value="#{link.deleted}" onLabel="Löschen" offLabel="-" offIcon="ui-icon-check" onIcon="ui-icon-trash" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Active?" priority="2" width="100"
+						rendered="#{request.isUserInRole('ADMIN')}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{link.state}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:selectBooleanButton value="#{link.state}" onLabel="Aktiv" offLabel="Inaktiv" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column style="width:32px">
+						<p:rowEditor />
+					</p:column>
+				</p:dataTable>
+				<p:dialog header="Neuen Link einfügen" modal="true"
+					widgetVar="new-link" height="150" width="450">
+					<h:panelGrid id="new-link-grid" columns="2" cellpadding="5"
+						style="margin-bottom:10px; width: 100%;">
+						<h:outputLabel for="new-name" value="Beschreibung:"
+							style="font-weight:bold" />
+						<p:inputText id="new-name" value="#{linkController.link.name}"
+							required="true" label="Beschreibung" style="width: 100%;" />
+
+						<h:outputLabel for="new-link" value="URL:"
+							style="font-weight:bold" />
+						<p:inputText id="new-link" value="#{linkController.link.url}"
+							required="true" label="URL" style="width: 100%;" />
+
+						<h:outputLabel for="new-active" value="Status:"
+							style="font-weight:bold"
+							rendered="#{request.isUserInRole('ADMIN')}" />
+						<p:selectBooleanButton id="new-active" value="#{linkController.link.state}" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:60px" rendered="#{request.isUserInRole('ADMIN')}" />
+
+						<p:commandButton value="Einfügen" id="new-save"
+							actionListener="#{linkController.saveLink()}" oncomplete="window.location.reload();">
+						</p:commandButton>
+					</h:panelGrid>
+				</p:dialog>
+			</h:form>
+		</p:panel>
+		
+		<p:socket onMessage="handleMessage" channel="/notify" />
+		
+		<script type="text/javascript">
+	        function handleMessage(facesmessage) {
+	            facesmessage.severity = 'info';
+	 
+	            PF('messages').show([facesmessage]);
+	        }
+		</script>	
+	</ui:define>
+</ui:composition>
