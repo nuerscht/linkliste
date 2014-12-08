@@ -11,23 +11,15 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.jms.JMSConnectionFactory;
 import javax.jms.JMSContext;
-import javax.jms.JMSException;
-import javax.jms.Message;
 import javax.jms.ObjectMessage;
 import javax.jms.Queue;
-import javax.jms.TextMessage;
-
 import org.primefaces.event.RowEditEvent;
-import org.primefaces.push.EventBus;
-import org.primefaces.push.EventBusFactory;
-
 import ch.ffhs.jpa.domain.Link;
 import ch.ffhs.jpa.service.intf.LinkListService;
 
 @ManagedBean
 @ViewScoped
 public class LinkController {
-    private final static String CHANNEL = "/notify";
     
 	@EJB
 	LinkListService linkListService;
@@ -59,18 +51,6 @@ public class LinkController {
 		ObjectMessage message = context.createObjectMessage(new FacesMessage("Neuer Link eingefügt", link.getUrl()));
 		link = new Link();
 		context.createProducer().send(queueLink, message);
-	}
-	
-	public void sendPushMessage(Message message) {
-		try {
-			ObjectMessage tm = (ObjectMessage) message;
-			FacesMessage fm = (FacesMessage)tm.getObject();
-			//Send Push to Client
-		    EventBus eventBus = EventBusFactory.getDefault().eventBus();
-		    eventBus.publish(CHANNEL, fm);
-		} catch (JMSException e) {
-			System.out.println(e);
-		}
 	}
 
 	public void onRowEdit(RowEditEvent event) {

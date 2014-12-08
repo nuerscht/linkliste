@@ -97,6 +97,7 @@
 	</script>
 </h:head>
 <h:body>
+	<p:growl widgetVar="pustMessages" id="pustMessages" showDetail="true" />
 	<div class="container">
 		<div class="footer">
 		 	&#169; 2014, Sandro Dallo und Patrick Bösch
@@ -132,5 +133,14 @@
 			</div>
 		</div>
 	</div>
+	<p:socket onMessage="handleMessage" channel="/notify" />
+		
+		<script type="text/javascript">
+	        function handleMessage(facesmessage) {
+	            facesmessage.severity = 'info';
+	 
+	            PF('pustMessages').show([facesmessage]);
+	        }
+		</script>
 </h:body>
 </html>

@@ -92,16 +92,6 @@
 					</h:panelGrid>
 				</p:dialog>
 			</h:form>
-		</p:panel>
-		
-		<p:socket onMessage="handleMessage" channel="/notify" />
-		
-		<script type="text/javascript">
-	        function handleMessage(facesmessage) {
-	            facesmessage.severity = 'info';
-	 
-	            PF('messages').show([facesmessage]);
-	        }
-		</script>	
+		</p:panel>	
 	</ui:define>
 </ui:composition>

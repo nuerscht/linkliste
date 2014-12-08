@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.Local;
 import javax.ejb.Stateful;
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import ch.ffhs.jpa.dao.intf.LinkListDao;
