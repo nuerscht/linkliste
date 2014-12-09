@@ -16,7 +16,7 @@
 				<p:dataTable id="links" var="link"
 					value="#{linkController.getLinks()}" rowKey="#{car.id}"
 					paginator="true" rows="10" tableStyleClass="ui-table-columntoggle"
-					editable="true">
+					editable="true" rendered="#{request.isUserInRole('ADMIN')}">
 					<p:ajax event="rowEdit" listener="#{linkController.onRowEdit}" oncomplete="window.location.reload();" />
 					<p:ajax event="rowEditCancel" listener="#{linkController.onRowCancel}" />
 					<p:column headerText="Beschreibung" sortBy="#{link.name}"

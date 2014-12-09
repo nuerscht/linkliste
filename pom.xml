@@ -32,5 +32,6 @@
     <module>linklist-jsf</module>
     <module>linklist-ear</module>
     <module>linklist-jpa</module>
+    <module>linklist-webservice</module>
   </modules>
 </project>
