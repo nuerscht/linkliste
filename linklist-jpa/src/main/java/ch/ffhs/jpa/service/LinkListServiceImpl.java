@@ -29,6 +29,10 @@ public class LinkListServiceImpl implements LinkListService {
 	public List<Link> getLinks() {
 		return linkListDao.getLinks();
 	}
+	
+	public List<Link> getLinks(String where) {
+		return linkListDao.getLinks(where);
+	}
 
 	@Override
 	public Link getById(int id) {

@@ -36,6 +36,14 @@ public class LinkController {
 
 	public List<Link> getLinks() {
 		if (linkList == null) {
+			linkList = linkListService.getLinks("state = true");
+		}
+		
+		return linkList;
+	}
+
+	public List<Link> getLinksAdmin() {
+		if (linkList == null) {
 			linkList = linkListService.getLinks();
 		}
 		
@@ -47,10 +55,18 @@ public class LinkController {
 	}
 
 	public void saveLink() {
-		linkListService.save(link);
-		ObjectMessage message = context.createObjectMessage(new FacesMessage("Neuer Link eingefügt", link.getUrl()));
-		link = new Link();
-		context.createProducer().send(queueLink, message);
+		List<Link> links = linkListService.getLinks("url = '" + link.getUrl().trim() + "'");
+		
+		if (links.size() == 0) {
+			linkListService.save(link);
+			ObjectMessage message = context.createObjectMessage(new FacesMessage("Neuer Link eingefügt (nicht freigeschaltet)", link.getUrl()));
+			link = new Link();
+			context.createProducer().send(queueLink, message);
+		} else {
+			FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "URL schon vorhanden", link.getUrl());
+			FacesContext.getCurrentInstance().addMessage("messages", msg);
+		}
 	}
 
 	public void onRowEdit(RowEditEvent event) {
@@ -58,7 +74,7 @@ public class LinkController {
 		
 		ObjectMessage message;
 		if (link.getState()) {
-			message = context.createObjectMessage(new FacesMessage("Link aktiviert", link.getUrl()));
+			message = context.createObjectMessage(new FacesMessage("Link freigeschaltet", link.getUrl()));
 		} else {
 			message = context.createObjectMessage(new FacesMessage("Link deaktiviert", link.getUrl()));
 		}

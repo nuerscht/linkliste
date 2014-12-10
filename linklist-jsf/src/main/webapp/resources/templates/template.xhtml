@@ -117,7 +117,8 @@
 									<p:menuitem value="Anleitung" outcome="/pages/web/index" icon="ui-icon-document"/>
 								</p:submenu>
 								<p:submenu label="Links">
-									<p:menuitem value="Links" outcome="/pages/web/link/view" icon="ui-icon-link"/>
+									<p:menuitem value="Links" outcome="/pages/web/link/view" icon="ui-icon-link" rendered="#{!request.isUserInRole('ADMIN')}"/>
+									<p:menuitem value="Links" outcome="/pages/web/link/view_admin" icon="ui-icon-link" rendered="#{request.isUserInRole('ADMIN')}"/>
 								</p:submenu>
 								<p:submenu label="Synchronisieren">
 									<p:menuitem value="Synchronisieren" outcome="/pages/web/sync/view" icon="ui-icon-link"/>
@@ -127,7 +128,6 @@
 								</p:submenu>
 							</p:panelMenu>
 						</p:panel>
-					
 					</h:form>
 				</div>
 				<div class="ui-grid-col-10">				

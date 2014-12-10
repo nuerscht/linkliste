@@ -25,17 +25,23 @@ public class LinkListDaoJpa implements LinkListDao {
 		em.merge(linkList);
 		return linkList;
 	}
-	
+
 	@Override	
 	public List<Link> getLinks() {
-		/*CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Link> query = cb.createQuery(Link.class);
-		CriteriaQuery<Link> qr = query.select(query.from(Link.class));
-		qr.where(cb.equal(query.from(Link.class).get("deleted"), false));
-		qr.orderBy(cb.asc(query.from(Link.class).get("name")));
-		return em.createQuery(qr).getResultList();*/
+		return getLinks(null);
+	}
+	
+	@Override	
+	public List<Link> getLinks(String where) {
+		String jpql = "SELECT l FROM ch.ffhs.jpa.domain.Link AS l WHERE l.deleted = false";
 		
-		TypedQuery<Link> query = em.createQuery("SELECT l FROM ch.ffhs.jpa.domain.Link AS l WHERE l.deleted = false ORDER BY l.name", Link.class);
+		if (where != null) {
+			jpql += " AND (" + where + ")";
+		}
+		
+		jpql += " ORDER BY l.name";
+		
+		TypedQuery<Link> query = em.createQuery(jpql, Link.class);
 		return query.getResultList();
 	}
 

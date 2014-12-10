@@ -14,9 +14,9 @@
 				<p:commandButton value="Neuen Link einfügen" type="button"
 					onclick="PF('new-link').show();" />
 				<p:dataTable id="links" var="link"
-					value="#{linkController.getLinks()}" rowKey="#{car.id}"
+					value="#{linkController.getLinksAdmin()}" rowKey="#{car.id}"
 					paginator="true" rows="10" tableStyleClass="ui-table-columntoggle"
-					editable="true">
+					editable="true" rendered="#{request.isUserInRole('ADMIN')}">
 					<p:ajax event="rowEdit" listener="#{linkController.onRowEdit}" oncomplete="window.location.reload();" />
 					<p:ajax event="rowEditCancel" listener="#{linkController.onRowCancel}" />
 					<p:column headerText="Beschreibung" sortBy="#{link.name}"
@@ -40,7 +40,32 @@
 							</f:facet>
 						</p:cellEditor>
 					</p:column>
-					
+					<p:column headerText="Delete?" priority="2" width="100"
+						rendered="#{request.isUserInRole('ADMIN')}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{link.deleted}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:selectBooleanButton value="#{link.deleted}" onLabel="Löschen" offLabel="-" offIcon="ui-icon-check" onIcon="ui-icon-trash" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					<p:column headerText="Active?" priority="2" width="100"
+						rendered="#{request.isUserInRole('ADMIN')}">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{link.state}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:selectBooleanButton value="#{link.state}" onLabel="Aktiv" offLabel="Inaktiv" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:100%" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column style="width:32px" rendered="#{request.isUserInRole('ADMIN')}">
+						<p:rowEditor />
+					</p:column>
 				</p:dataTable>
 				<p:dialog header="Neuen Link einfügen" modal="true"
 					widgetVar="new-link" height="150" width="450">
@@ -56,6 +81,10 @@
 						<p:inputText id="new-link" value="#{linkController.link.url}"
 							required="true" label="URL" style="width: 100%;" />
 
+						<h:outputLabel for="new-active" value="Status:"
+							style="font-weight:bold"
+							rendered="#{request.isUserInRole('ADMIN')}" />
+						<p:selectBooleanButton id="new-active" value="#{linkController.link.state}" onLabel="Yes" offLabel="No" onIcon="ui-icon-check" offIcon="ui-icon-close" style="width:60px" rendered="#{request.isUserInRole('ADMIN')}" />
 
 						<p:commandButton value="Einfügen" id="new-save"
 							actionListener="#{linkController.saveLink()}" oncomplete="window.location.reload();">

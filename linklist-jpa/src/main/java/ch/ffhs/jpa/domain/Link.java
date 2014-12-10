@@ -5,8 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity(name = "linklist")
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"url"})})
 public class Link {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +22,7 @@ public class Link {
 	private boolean state = false;
 	@Column
 	private boolean deleted = false;
+
 
 	public boolean isDeleted() {
 		return deleted;
